@@ -50,18 +50,3 @@ var questions = [
         answer: "I don't like bullies, I don't care where they're from"
     }
 ];
-
-var points = 0;
-
-for (i = 0; i < questions.length; i++) {
-    var answer = prompt(questions[i].question);
-
-    if (answer.toLowerCase() === questions[i].answer.toLowerCase()) {
-        alert("CORRECT");
-        points += 10;
-        console.log(points);
-    }
-    else {
-        alert("WRONG");
-    }
-}

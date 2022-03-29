@@ -24,3 +24,15 @@ main {
     position: relative;
     top: 100px
 }
+
+.hidden {
+    display: none;
+}
+
+.answers {
+    display: inline-grid;
+}
+
+.answers button {
+    margin: 10px
+}

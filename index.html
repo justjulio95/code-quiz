@@ -18,20 +18,30 @@
 
         <main class="page-content" id="page-content">
             <!--Add a greeting here-->
-            <div class="start-screen">
+            <div class="start-screen" id="start-screen">
                 <h1>Welcome To The Coding Quiz Challenge</h1>
-            <p>
-                This is a quiz that will test your knowledge on the MCU. Try your best to answer all the questions 
-                as fast as you can! If you answer a question incorrectly, you'll lose 10 seconds of time. At the end, 
-                enter your initials and high score.
-                <br>
-                Good luck!
-            </p>
-            <button id="start-button">Start Quiz</button>
+                <p>
+                    This is a quiz that will test your knowledge on the MCU. Try your best to answer all the questions 
+                    as fast as you can! If you answer a question incorrectly, you'll lose 10 seconds of time. At the end, 
+                    enter your initials and high score.
+                    <br>
+                    Good luck!
+                </p>
+                <button id="start-button">Start Quiz</button>
+            </div>
+
+            <div class="hidden" id="questions">
+                <h3 class="question" id="question-title">Test</h3>
+                <div class="answers">
+                    <button class="answer-button" id="a1">Test1</button>
+                    <button class="answer-button" id="a2">Test2</button>
+                    <button class="answer-button" id="a3">Test3</button>
+                </div>
             </div>
 
 
         </main>
-        <!--<script src='./assets/js/script.js'></script>-->
+        <script src='./assets/js/questions.js'></script>
+        <script src='./assets/js/logic.js'></script>
     </body>
 </html>
