@@ -42,7 +42,7 @@ var questions = [
     {
         question: "The final battle between Spider-Man and Mysterio takes place on which bridge?",
         choices: ["Waterloo Bridge", "London Bridge", "Tower Bridge"],
-        answer: ["London Bridge"]
+        answer: "London Bridge"
     },
     {
         question: "In Captain America: The First Avenger, what does Steve Rogers say when asked if he wants to kill Nazi's?",
