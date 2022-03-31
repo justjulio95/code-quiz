@@ -27,7 +27,7 @@ function startQuiz() {
         seconds--;
         if (seconds == 0 || seconds < 0) {
             endQuiz();
-            clearInterval;
+            clearInterval();
         }
         }, 1000);
 
