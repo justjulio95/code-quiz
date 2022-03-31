@@ -22,11 +22,12 @@ function startQuiz() {
     quizMain.setAttribute("class", "start-screen");
 
     // how to make this stop at zero??? OFFICE HOURS
-    setInterval(function timer() {
+    var timer = setInterval(function timer() {
         timerEl.textContent = "Time: " + seconds;
         seconds--;
-        if (seconds === 0) {
+        if (seconds == 0 || seconds < 0) {
             endQuiz();
+            clearInterval;
         }
         }, 1000);
 
@@ -90,7 +91,7 @@ function endQuiz() {
     if (seconds <= 0) {
         seconds = 0;
     }
-    score = seconds
+    score = seconds;
     //hide the questions
     quizMain.removeAttribute("class", "start-screen")
     quizMain.setAttribute("class", "hidden");
@@ -100,7 +101,7 @@ function endQuiz() {
     //dynamically create end screen
     var endScreen = document.createElement("div");
     endScreen.setAttribute("class", "start-screen");
-    endScreen.innerHTML = "<h1>good Job!<h1>";
+    endScreen.innerHTML = "<h1>Good Job!<h1>";
 
     var scorePage = document.createElement("p")
     scorePage.innerHTML = "<p>Your high score is " + score +"<p>"
