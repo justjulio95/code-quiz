@@ -2,6 +2,7 @@
 var pageContentEl = document.getElementById("page-content");
 var startPage = document.getElementById("start-screen");
 var startBtn = document.getElementById("start-button");
+var timerEl = document.getElementById("timer");
 var quizMain = document.getElementById("questions");
 var questionTitle = document.getElementById("question-title");
 var choiceBtns = document.getElementsByClassName("answer-button")
@@ -9,7 +10,8 @@ var choice1 = document.getElementById("a1");
 var choice2 = document.getElementById("a2");
 var choice3 = document.getElementById("a3");
 var quizIndex = 0;
-var seconds = 0;
+var seconds = 60;
+var score = 0
 
 //function to begin the quiz
 function startQuiz() {
@@ -18,6 +20,15 @@ function startQuiz() {
     quizMain.removeAttribute("class", "hidden");
     //shows the quiz
     quizMain.setAttribute("class", "start-screen");
+
+    // how to make this stop at zero??? OFFICE HOURS
+    setInterval(function timer() {
+        timerEl.textContent = "Time: " + seconds;
+        seconds--;
+        if (seconds === 0) {
+            endQuiz();
+        }
+        }, 1000);
 
     //put questions to the screen
     renderQuestion(quizIndex);
@@ -48,6 +59,8 @@ function questionClick() {
             }, 1500)
         checkFinished();
     } else {
+        //subtract time
+        seconds -= 10
         // alert wrong
         incorrectTextEl.setAttribute("class", "start-screen");
         pageContentEl.appendChild(incorrectTextEl);
@@ -74,14 +87,24 @@ function checkFinished () {
 }
 
 function endQuiz() {
+    if (seconds <= 0) {
+        seconds = 0;
+    }
+    score = seconds
     //hide the questions
     quizMain.removeAttribute("class", "start-screen")
     quizMain.setAttribute("class", "hidden");
+    //hide the timer
+    timer.setAttribute("class", "hidden");
 
     //dynamically create end screen
     var endScreen = document.createElement("div");
     endScreen.setAttribute("class", "start-screen");
-    endScreen.innerHTML = "<h1>It's Over!<h1>";
+    endScreen.innerHTML = "<h1>good Job!<h1>";
+
+    var scorePage = document.createElement("p")
+    scorePage.innerHTML = "<p>Your high score is " + score +"<p>"
+    endScreen.appendChild(scorePage);
 
     pageContentEl.appendChild(endScreen);
 }
