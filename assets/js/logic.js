@@ -1,4 +1,4 @@
-// Set various variables globally for me to manipulate throughout the functions
+// Set variables globally for me to manipulate throughout the functions
 var pageContentEl = document.getElementById("page-content");
 var startPage = document.getElementById("start-screen");
 var startBtn = document.getElementById("start-button");
@@ -30,39 +30,31 @@ function startQuiz() {
 function questionClick() {
     // dynamically create Correct alert to screen
     var correctTextEl = document.createElement("h2")
-    correctTextEl.setAttribute("class", "hidden")
     correctTextEl.textContent = "Correct!"
-    pageContentEl.appendChild(correctTextEl);
 
     // dynamically create Incorrect alert to screen
     var incorrectTextEl = document.createElement("h2")
-    incorrectTextEl.setAttribute("class", "hidden")
     incorrectTextEl.textContent = "Wrong!"
-    pageContentEl.appendChild(incorrectTextEl);
 
     //compare clicked answer vs answer var
     //if correct
     if(this.textContent === questions[quizIndex].answer) {
         // alert correct
-        correctTextEl.removeAttribute("class", "hidden")
-        correctTextEl.setAttribute("class", "start-screen")
+        correctTextEl.setAttribute("class", "start-screen");
+        pageContentEl.appendChild(correctTextEl);
         //set a timer to remove the text from the screen
         setTimeout(function() {
-            correctTextEl.removeAttribute("class", "start-screen");
-            correctTextEl.setAttribute("class", "hidden");
-            }, 2000)
-        //console.log("Correct!");
+            pageContentEl.removeChild(correctTextEl);
+            }, 1500)
         checkFinished();
     } else {
         // alert wrong
-        incorrectTextEl.removeAttribute("class", "hidden")
-        incorrectTextEl.setAttribute("class", "start-screen")
+        incorrectTextEl.setAttribute("class", "start-screen");
+        pageContentEl.appendChild(incorrectTextEl);
         //set a timer to remove the text from the screen
         setTimeout(function() {
-            incorrectTextEl.removeAttribute("class", "start-screen");
-            incorrectTextEl.setAttribute("class", "hidden");
+            pageContentEl.removeChild(incorrectTextEl);
             }, 1500)
-        //console.log("Wrong")
         checkFinished();
     }
 }
@@ -102,13 +94,3 @@ function renderQuestion(num) {
 }
 
 startBtn.addEventListener("click", startQuiz);
-
-
-
-
-
-
-
-/*setTimeout(function() {
-console.log(this.textContent + " again")
-}, 2000)*/
