@@ -1,7 +1,7 @@
 var questions = [
     {
         question: "What is the first line of dialogue in Iron Man, the very first MCU film?",
-        choices: ["I feel like you're driving me to a court-marshal.", "I am Iron Man", "Is it cool if I take a picture with you?"],
+        choices: ["I feel like you're driving me to a court-marshal", "I am Iron Man", "Is it cool if I take a picture with you?"],
         answer: "I feel like you're driving me to a court-marshal"
     },
     {

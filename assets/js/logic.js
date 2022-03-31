@@ -1,4 +1,5 @@
 // Set various variables globally for me to manipulate throughout the functions
+var pageContentEl = document.getElementById("page-content");
 var startPage = document.getElementById("start-screen");
 var startBtn = document.getElementById("start-button");
 var quizMain = document.getElementById("questions");
@@ -9,10 +10,6 @@ var choice2 = document.getElementById("a2");
 var choice3 = document.getElementById("a3");
 var quizIndex = 0;
 var seconds = 0;
-
-/*for (let i = 0; i < questions.length; i++) {
-    console.log(questions[i].answer)
-}*/
 
 //function to begin the quiz
 function startQuiz() {
@@ -31,26 +28,71 @@ function startQuiz() {
 }
 
 function questionClick() {
-    console.log(this.textContent)
-    debugger;
-    if (this.textContent = questions[quizIndex].answer) {
-        console.log("CORRECT!!!")
+    // dynamically create Correct alert to screen
+    var correctTextEl = document.createElement("h2")
+    correctTextEl.setAttribute("class", "hidden")
+    correctTextEl.textContent = "Correct!"
+    pageContentEl.appendChild(correctTextEl);
+
+    // dynamically create Incorrect alert to screen
+    var incorrectTextEl = document.createElement("h2")
+    incorrectTextEl.setAttribute("class", "hidden")
+    incorrectTextEl.textContent = "Wrong!"
+    pageContentEl.appendChild(incorrectTextEl);
+
+    //compare clicked answer vs answer var
+    //if correct
+    if(this.textContent === questions[quizIndex].answer) {
+        // alert correct
+        correctTextEl.removeAttribute("class", "hidden")
+        correctTextEl.setAttribute("class", "start-screen")
+        //set a timer to remove the text from the screen
+        setTimeout(function() {
+            correctTextEl.removeAttribute("class", "start-screen");
+            correctTextEl.setAttribute("class", "hidden");
+            }, 2000)
+        //console.log("Correct!");
+        checkFinished();
+    } else {
+        // alert wrong
+        incorrectTextEl.removeAttribute("class", "hidden")
+        incorrectTextEl.setAttribute("class", "start-screen")
+        //set a timer to remove the text from the screen
+        setTimeout(function() {
+            incorrectTextEl.removeAttribute("class", "start-screen");
+            incorrectTextEl.setAttribute("class", "hidden");
+            }, 1500)
+        //console.log("Wrong")
+        checkFinished();
     }
 }
-    /*setTimeout(function() {
-        console.log(this.textContent + " again")
-    }, 2000)*/
 
-// compare userPickedAnswer vs answer var(in questions.js)
-//  if correct
-        // alert correct!
-//  else
-        // alert wrong and time - 10
-// if quizIndex === 9
-    // quizEnd() make a function for later
-// else
-    // quizindex ++
-    // renderQuestions(quizIndex)
+//function to check if the is over (using quizIndex FOR NOW)
+function checkFinished () {
+    if (quizIndex === 9) {
+        endQuiz();
+    } else {
+        //increment quizIndex
+        quizIndex++;
+        setTimeout(function() {
+            renderQuestion(quizIndex);
+            }, 1500)
+        //renderQuestion(quizIndex);
+    }
+}
+
+function endQuiz() {
+    //hide the questions
+    quizMain.removeAttribute("class", "start-screen")
+    quizMain.setAttribute("class", "hidden");
+
+    //dynamically create end screen
+    var endScreen = document.createElement("div");
+    endScreen.setAttribute("class", "start-screen");
+    endScreen.innerHTML = "<h1>It's Over!<h1>";
+
+    pageContentEl.appendChild(endScreen);
+}
 
 function renderQuestion(num) {
     questionTitle.textContent = questions[num].question;
@@ -59,26 +101,14 @@ function renderQuestion(num) {
     choice3.textContent = questions[num].choices[2];
 }
 
-
-
-
-
-
-/*function getChoice(event) {
-    var choice = event.target.value
-    console.log(choice);
-}*/
-
 startBtn.addEventListener("click", startQuiz);
-/*for (i = 0; i < questions.length; i++) {
-    var answer = prompt(questions[i].question);
 
-    if (answer.toLowerCase() === questions[i].answer.toLowerCase()) {
-        alert("CORRECT");
-        points += 10;
-        console.log(score);
-    }
-    else {
-        alert("WRONG");
-    }
-}*/
+
+
+
+
+
+
+/*setTimeout(function() {
+console.log(this.textContent + " again")
+}, 2000)*/
