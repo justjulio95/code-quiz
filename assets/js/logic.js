@@ -10,7 +10,7 @@ var choice1 = document.getElementById("a1");
 var choice2 = document.getElementById("a2");
 var choice3 = document.getElementById("a3");
 var quizIndex = 0;
-var seconds = 60;
+var seconds = 2;
 var score = 0
 
 //function to begin the quiz
@@ -25,11 +25,13 @@ function startQuiz() {
     var timer = setInterval(function timer() {
         timerEl.textContent = "Time: " + seconds;
         seconds--;
-        if (seconds == 0 || seconds < 0) {
+        if (seconds == 0) {
+            seconds = 0
             endQuiz();
-            clearInterval();
+            clearInterval(seconds);
+            console.log("Time has run out!")
         }
-        }, 1000);
+    }, 1000);
 
     //put questions to the screen
     renderQuestion(quizIndex);
@@ -101,13 +103,61 @@ function endQuiz() {
     //dynamically create end screen
     var endScreen = document.createElement("div");
     endScreen.setAttribute("class", "start-screen");
+    endScreen.setAttribute("id", "end-screen")
     endScreen.innerHTML = "<h1>Good Job!<h1>";
 
-    var scorePage = document.createElement("p")
-    scorePage.innerHTML = "<p>Your high score is " + score +"<p>"
-    endScreen.appendChild(scorePage);
+    //alert player of their final score
+    var scoreAlert = document.createElement("p")
+    scoreAlert.setAttribute("id", "final-score")
+    scoreAlert.innerHTML = "Your high score is " + score +"!<br/> Enter your initials below!"
+    scoreAlert.setAttribute("style", "position:relative; bottom:20px")
+    endScreen.appendChild(scoreAlert);
+
+    //get players initials
+    var initials = document.createElement("input");
+    initials.setAttribute("id", "initials");
+    initials.setAttribute("style", "position:inherit; bottom:45px; left:50px");
+    endScreen.appendChild(initials);
+
+    //create a submit button
+    var submitBtn = document.createElement("button");
+    submitBtn.setAttribute("style", "position:relative; right:70px; bottom:5px")
+    submitBtn.textContent = "Submit"
+    endScreen.appendChild(submitBtn);
 
     pageContentEl.appendChild(endScreen);
+    
+    submitBtn.addEventListener("click", submitScore)
+}
+
+// let's the user submit and store their scores into local storage
+function submitScore() {
+    // create variable for initials
+    var initials = document.getElementById("initials").value
+    // create variable for finalScore
+    var finalScore = score
+    // create an array of objects for highScores
+    var highScore = [{
+        initials: initials,
+        score: finalScore
+    }]
+
+    // pull a value for pastScores
+    var pastScores = JSON.parse(localStorage.getItem("highScore"))
+    //if pastScores is nonexistent
+    if (pastScores === null) {
+        //set pastScores to highScore
+        pastScores = highScore
+    } else {
+        //else push value to index 0 in array
+        pastScores.push(highScore[0])
+    }
+
+    localStorage.setItem("highScore", JSON.stringify(pastScores))
+
+    console.log(initials)
+    console.log(finalScore)
+    console.log(highScore)
 }
 
 function renderQuestion(num) {
