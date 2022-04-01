@@ -12,6 +12,8 @@ var choice3 = document.getElementById("a3");
 var quizIndex = 0;
 var seconds = 60;
 var score = 0
+var timeoutClear;
+var intervalClear;
 
 //function to begin the quiz
 function startQuiz() {
@@ -21,14 +23,14 @@ function startQuiz() {
     //shows the quiz
     quizMain.setAttribute("class", "start-screen");
 
+    timeoutClear = setTimeout(endQuiz, 60000)
+
     // how to make this stop at zero??? OFFICE HOURS
-    var timer = setInterval(function timer() {
+    intervalClear = setInterval(function timer() {
         timerEl.textContent = "Time: " + seconds;
         seconds--;
-        if (seconds == 0) {
-            seconds = 0
+        if (seconds === 0 || seconds <= 0 || quizIndex === 9) {
             endQuiz();
-            clearInterval(seconds);
             console.log("Time has run out!")
         }
     }, 1000);
@@ -89,10 +91,13 @@ function checkFinished () {
     }
 }
 
+//function to end the quiz and get info from the user
 function endQuiz() {
     if (seconds <= 0) {
         seconds = 0;
     }
+    clearTimeout(timeoutClear)
+    clearInterval(intervalClear)
     score = seconds;
     //hide the questions
     quizMain.removeAttribute("class", "start-screen")
@@ -116,12 +121,15 @@ function endQuiz() {
     //get players initials
     var initials = document.createElement("input");
     initials.setAttribute("id", "initials");
+    initials.setAttribute("minlength", "2")
+    initials.setAttribute("maxlength", "3")
     initials.setAttribute("style", "position:inherit; bottom:45px; left:50px");
     endScreen.appendChild(initials);
 
     //create a submit button
     var submitBtn = document.createElement("button");
-    submitBtn.setAttribute("style", "position:relative; right:70px; bottom:5px")
+    submitBtn.setAttribute("style", "position:relative; right:70px; bottom:5px");
+    submitBtn.setAttribute("onclick", "location.href='./scores.html'");
     submitBtn.textContent = "Submit"
     endScreen.appendChild(submitBtn);
 
@@ -154,10 +162,6 @@ function submitScore() {
     }
 
     localStorage.setItem("highScore", JSON.stringify(pastScores))
-
-    console.log(initials)
-    console.log(finalScore)
-    console.log(highScore)
 }
 
 function renderQuestion(num) {
