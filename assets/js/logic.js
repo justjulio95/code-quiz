@@ -10,7 +10,7 @@ var choice1 = document.getElementById("a1");
 var choice2 = document.getElementById("a2");
 var choice3 = document.getElementById("a3");
 var quizIndex = 0;
-var seconds = 2;
+var seconds = 60;
 var score = 0
 
 //function to begin the quiz

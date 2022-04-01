@@ -16,6 +16,20 @@ header {
     color: gold
 }
 
+a {
+    text-decoration: none;
+    color: gold
+}
+
+a:hover {
+    color: rgba(255, 215, 0, 0.7);
+    text-decoration: underline;
+}
+
+button a:hover{
+    text-decoration: none;
+}
+
 .view {
     margin: 30px;
 }
@@ -35,6 +49,10 @@ main {
     font-size: 20px;
     background: rgba(135,193,255,0.6);
     color: maroon;
+}
+
+.start-screen p {
+    padding: 0 70px;
 }
 
 button {
@@ -61,12 +79,7 @@ button:hover {
     margin: 10px
 }
 
-/*#end-screen p {
-    position: relative;
-    bottom: 20px;
-}
-
-input {
-    position: relative;
-    bottom: 30px;
+ol {
+    list-style-position: inside;
+    padding: 0;
 }
