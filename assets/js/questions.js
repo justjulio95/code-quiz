@@ -20,7 +20,7 @@ var questions = [
         answer: "The Quantum Realm"
     },
     {
-        question: "In Captain Marvel, what kind of alien is Groose the Cat?",
+        question: "In Captain Marvel, what kind of alien is Goose the Cat?",
         choices: ["Chitauri", "Flerken", "Sakaaran"],
         answer: "Flerken"
     },

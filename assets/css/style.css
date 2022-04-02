@@ -42,7 +42,7 @@ main {
     text-align: center;
 }
 
-.start-screen {
+.visible {
     position: relative;
     top: 100px;
     margin: 0 200px;
@@ -51,7 +51,7 @@ main {
     color: maroon;
 }
 
-.start-screen p {
+.visible p {
     padding: 0 70px;
 }
 
